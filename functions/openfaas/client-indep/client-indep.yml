@@ -1,0 +1,46 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  client-indep-1:
+    lang: python3-http-debian
+    handler: ./client-indep
+    image: andreasgrafberger/faas-func-fedless-1
+    build_args:
+      ADDITIONAL_PACKAGE: git
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    requests:
+      cpu: 300m
+      memory: 1000Mi
+    environment:
+      write_timeout: 20m
+      read_timeout: 20m
+      exec_timeout: 20m
+      upstream_timeout: 19m55s
+      handler_wait_duration: 2m
+      #https_proxy: http://proxy.in.tum.de:8080/
+      #http_proxy: http://proxy.in.tum.de:8080/
+
+  client-indep-2:
+    lang: python3-http-debian
+    handler: ./client-indep
+    image: andreasgrafberger/faas-func-fedless-2
+    build_args:
+      ADDITIONAL_PACKAGE: git
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    requests:
+      cpu: 300m
+      memory: 1000Mi
+    environment:
+      write_timeout: 20m
+      read_timeout: 20m
+      exec_timeout: 20m
+      upstream_timeout: 19m55s
+      handler_wait_duration: 2m
+      #https_proxy: http://proxy.in.tum.de:8080/
+      #http_proxy: http://proxy.in.tum.de:8080/

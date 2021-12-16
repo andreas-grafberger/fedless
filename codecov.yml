@@ -1,0 +1,11 @@
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 5% # Allowed overall percentage drop
+        informational: true
+    patch:
+      default:
+        target: 90% # Coverage of lines added
+        informational: true

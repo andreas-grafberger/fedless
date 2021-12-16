@@ -1,0 +1,72 @@
+database:
+  host: <host>
+
+cluster:
+  apihost: <host>:31001
+  auth: <auth>
+
+server:
+  invoker:
+    type: openwhisk
+    params:
+      name: invoker
+      file: <path-to-project>/functions/openwhisk/invoker/main.py
+      image: andreasgrafberger/fedless-openwhisk:clients
+      memory: 2048
+      timeout: 60000
+
+  evaluator:
+    type: openwhisk
+    params:
+      name: evaluator
+      file: <path-to-project>/functions/openwhisk/evaluator/main.py
+      image: andreasgrafberger/fedless-openwhisk:clients
+      memory: 2048
+      timeout: 60000
+
+  aggregator:
+    type: openwhisk
+    params:
+      name: aggregator
+      file: <path-to-project>/functions/openwhisk/aggregator/main.py
+      image: andreasgrafberger/fedless-openwhisk:clients
+      memory: 2024
+      timeout: 60000
+
+
+clients:
+  hyperparams:
+    epochs: 1
+    batch_size: 10
+    optimizer:
+      class_name: "Adam"
+      config:
+        name: "Adam"
+        learning_rate: 0.001
+    metrics:
+      - accuracy
+  functions:
+    - function:
+        replicas: 1
+        params:
+          endpoint: https://<host>:31001/api/v1/web/guest/default/client-indep-1.json
+          self_signed_cert: true
+          token: <token>
+          type: openwhisk-web
+        type: openwhisk-web
+    - function:
+        params:
+          type: gcloud
+          url: https://<url>.cloudfunctions.net/http-indep-secure-15
+        type: gcloud
+    - function:
+        params:
+          trigger_url: https://<url>.azurewebsites.net/api/client-indep-secure
+          type: azure
+        type: azure
+    - function:
+        params:
+          api_key: null
+          apigateway: https://<url>/client-indep-secure-5
+          type: lambda
+        type: lambda
