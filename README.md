@@ -24,6 +24,8 @@ pytest && pytest -m integ
 
 ## Citation
 
+If you use this software, please cite it as below:
+
 ```
 @inproceedings{grafberger2021fedless,
   author    = {Grafberger, Andreas and Chadha, Mohak and Jindal, Anshul and Gu, Jianfeng and Gerndt, Michael},
