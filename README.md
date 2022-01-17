@@ -21,3 +21,18 @@ pip install ".[dev]"
 # Run unit and integration tests
 pytest && pytest -m integ
 ```
+
+## Citation
+
+```
+@inproceedings{grafberger2021fedless,
+  author    = {Grafberger, Andreas and Chadha, Mohak and Jindal, Anshul and Gu, Jianfeng and Gerndt, Michael},
+  booktitle = {2021 IEEE International Conference on Big Data (Big Data)},
+  title     = {FedLess: Secure and Scalable Federated Learning Using Serverless Computing},
+  year      = {2021},
+  volume    = {},
+  number    = {},
+  pages     = {164-173},
+  doi       = {10.1109/BigData52589.2021.9672067}
+}
+```
